@@ -3,7 +3,34 @@
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"> 
-
+<!-- Spring can be easily integrated into any Java-based web framework. 
+     All you need to do is to declare the ContextLoaderListener in your web.xml 
+     and use a contextConfigLocation <context-param> to set which context files 
+       to load. If you don't specify the contextConfigLocation context parameter, 
+     the ContextLoaderListener will look for a /WEB-INF/applicationContext.xml 
+      file to load. Once the context files are loaded, Spring creates a WebApplicationContext 
+        object based on the bean definitions and puts it into the ServletContext. -->
+ 
+    <context-param>
+       <param-name>contextConfigLocation</param-name>
+      <param-value>
+                 /WEB-INF/applicationContext.xml
+         </param-value>
+    </context-param>
+  <!-- Loads the Spring web application context -->
+ <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+ 
+ 
+   <filter>
+      <filter-name>OpenSessionInViewFilter</filter-name>
+      <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+ </filter>
+ <filter-mapping>
+      <filter-name>OpenSessionInViewFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+   </filter-mapping>
 	<description><![CDATA[My ZK Application]]></description>
 	<display-name>ZKBeanValidation</display-name>
 
@@ -17,6 +44,7 @@
 		<description>ZK loader for ZUML pages</description>
 		<servlet-name>zkLoader</servlet-name>
 		<servlet-class>org.zkoss.zk.ui.http.DHtmlLayoutServlet</servlet-class>
+		
 
 		<!-- Must. Specifies URI of the update engine (DHtmlUpdateServlet).
 		It must be the same as <url-pattern> for the update engine.

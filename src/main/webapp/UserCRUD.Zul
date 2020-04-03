@@ -1,0 +1,248 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+ <window id="userCRUD" border="none"
+      apply="org.zkoss.bind.BindComposer"
+     viewModel="@id('vm') @init('zkexample.zkoss.UserCRUDVM')">
+       <div
+         form="@id('fx') @load(vm.selectedRecord) @save(vm.selectedRecord, before='saveThis')">
+           <separator />
+         <div width="96%">
+             <span width="100%">
+                   <div sclass="sectionTitle">
+                       <separator />
+                     <label id="lcaption" sclass="sectionTitleLabel"
+                          value="Add/Edit Users" />
+                        <label id="readonly" sclass="sectionTitleLabel"
+                          value="(ReadOnly)" visible="@load(vm.makeAsReadOnly)" />
+                     <image
+                           src="@load(fxStatus.dirty?'images/unsaved32x32.png':'')" />
+                      <separator />
+                 </div>
+                </span>
+               <div id="buttonsDiv"
+                 style="float:right;margin-top:6px;">
+                 <button label="Save and Close" mold="trendy"
+                     visible="@load(not vm.makeAsReadOnly)"
+                      onClick="@command('saveThis', action=0)"
+                        sclass="mybutton button blue small">
+                 </button>
+                 <button label="Save and Add" mold="trendy"
+                       visible="@load(not vm.makeAsReadOnly)"
+                      onClick="@command('saveThis', action=1)"
+                        sclass="mybutton button blue small">
+                 </button>
+                 <button
+                      label="@load(vm.makeAsReadOnly ?'Close':'Cancel')" mold="trendy"
+                        onClick="@command('cancel')"
+                        sclass="mybutton button blue small">
+                 </button>
+             </div>
+                <div style="clear: both;"></div>
+                <div sclass="sectionSeperator"></div>
+           </div>
+ 
+            <span width="100%">
+               <div sclass="sectionTitle">
+                   <separator />
+                 <label value="Personel Information"
+                      sclass="sectionTitleLabel" />
+                    <separator />
+             </div>
+            </span>
+ 
+           <panel width="95%" sclass="sectionPanel">
+             <panelchildren>
+                   <separator />
+                 <grid sclass="vgrid">
+                     <columns>
+                         <column hflex="10%"></column>
+                           <column hflex="10%"></column>
+                           <column hflex="10%"></column>
+                           <column hflex="10%"></column>
+                       </columns>
+                        <rows>
+                            <row>
+                             <vlayout>
+                                 <label value="User Account No"
+                                       sclass="flabel" />
+                                   <textbox id="accountNo"
+                                      readonly="@load(vm.makeAsReadOnly)" mold="rounded" hflex="1"
+                                        value="@bind(fx.userAccountNumber)" />
+                               </vlayout>
+                                <vlayout>
+                                 <label value="Last Name"
+                                     sclass="flabel" />
+                                   <textbox id="lastname"
+                                       readonly="@load(vm.makeAsReadOnly)" mold="rounded" hflex="1"
+                                        value="@bind(fx.lastName)" />
+                                </vlayout>
+                                <vlayout>
+                                 <label value="First Name"
+                                        sclass="flabel" />
+                                   <textbox id="firstname"
+                                      readonly="@load(vm.makeAsReadOnly)" mold="rounded" hflex="1"
+                                        value="@bind(fx.firstName)" />
+                               </vlayout>
+                                <vlayout>
+                                 <label value="Middle Name"
+                                       sclass="flabel" />
+                                   <textbox id="middleName"
+                                     readonly="@load(vm.makeAsReadOnly)" mold="rounded"
+                                      value="@bind(fx.middleName)" />
+                              </vlayout>
+ 
+                            </row>
+                            <row>
+ 
+                             <vlayout>
+                                 <label value="Email"
+                                     sclass="flabel" />
+                                   <textbox id="email" hflex="1"
+                                        readonly="@load(vm.makeAsReadOnly)" mold="rounded"
+                                      value="@bind(fx.email)" />
+                               </vlayout>
+                                <cell colspan="2">
+                                    <hbox>
+                                        <vlayout>
+                                         <label value="SSN"
+                                               sclass="flabel" />
+                                           <textbox id="SSN"
+                                                readonly="@load(vm.makeAsReadOnly)" mold="rounded"
+                                              width="115%" value="@bind(fx.SSN)" />
+                                        </vlayout>
+                                        <vlayout>
+                                         <label value="DOB"
+                                               sclass="flabel" />
+                                           <textbox id="DOB"
+                                                readonly="@load(vm.makeAsReadOnly)" mold="rounded"
+                                              width="115%" value="@bind(fx.DOB)" />
+                                        </vlayout>
+                                    </hbox>
+                               </cell>
+                           </row>
+                        </rows>
+                   </grid>
+               </panelchildren>
+          </panel>
+          <separator />
+         <separator />
+         <separator />
+         <span width="100%">
+               <div sclass="sectionTitle">
+                   <separator />
+                 <label value="Address Information"
+                       sclass="sectionTitleLabel" />
+                    <separator />
+             </div>
+            </span>
+           <panel width="95%" sclass="sectionPanel">
+             <panelchildren>
+                   <grid sclass="vgrid">
+                     <columns>
+                         <column hflex="1"></column>
+                         <column hflex="1"></column>
+                         <column hflex="1"></column>
+                     </columns>
+                        <rows>
+                            <row>
+                             <cell colspan="2">
+                                    <vlayout>
+                                     <label value="Address"
+                                           sclass="flabel" />
+                                       <textbox id="address1" hflex="2"
+                                         readonly="@load(vm.makeAsReadOnly)" mold="rounded"
+                                          value="@bind(fx.address1)" />
+                                    </vlayout>
+                                </cell>
+                           </row>
+                            <row>
+                             <cell colspan="2">
+                                    <vlayout>
+                                     <textbox id="address2" hflex="2"
+                                         readonly="@load(vm.makeAsReadOnly)" mold="rounded"
+                                          value="@bind(fx.address2)" />
+                                    </vlayout>
+                                </cell>
+                           </row>
+                            <row>
+                             <vlayout>
+                                 <label value="City" sclass="flabel" />
+                                    <textbox id="City" hflex="1"
+                                     readonly="@load(vm.makeAsReadOnly)" mold="rounded"
+                                      value="@bind(fx.city)" />
+                                </vlayout>
+                                <vlayout>
+                                 <grid>
+                                        <columns>
+                                         <column width="60%"></column>
+                                           <column></column>
+                                       </columns>
+                                        <rows>
+                                            <row>
+                                             <vlayout>
+                                                 <label value="State"
+                                                     sclass="flabel" />
+                                                   <textbox id="State"
+                                                      readonly="@load(vm.makeAsReadOnly)" hflex="1"
+                                                       mold="rounded" value="@bind(fx.state)" />
+                                                </vlayout>
+                                                <vlayout>
+                                                 <label
+                                                       value="ZipCode" sclass="flabel" />
+                                                   <textbox
+                                                     id="zipcode" hflex="1" mold="rounded"
+                                                       readonly="@load(vm.makeAsReadOnly)"
+                                                     value="@bind(fx.zipCode)" />
+                                             </vlayout>
+                                            </row>
+                                        </rows>
+                                   </grid>
+                               </vlayout>
+                            </row>
+                        </rows>
+                   </grid>
+               </panelchildren>
+          </panel>
+          <separator />
+         <separator />
+         <separator />
+         <span width="100%">
+               <div sclass="sectionTitle">
+                   <separator />
+                 <label value="Login information"
+                     sclass="sectionTitleLabel" />
+                    <separator />
+             </div>
+            </span>
+           <panel width="95%" sclass="sectionPanel">
+             <panelchildren>
+                   <separator />
+                 <grid sclass="vgrid">
+                     <columns>
+                         <column width="20%"></column>
+                           <column width="24%"></column>
+                       </columns>
+                        <rows>
+                            <row>
+                             <vlayout>
+                                 <label value="Login ID"
+                                      sclass="flabel" />
+                                   <textbox id="loginid" hflex="1"
+                                      readonly="@load(vm.makeAsReadOnly)" mold="rounded"
+                                      value="@bind(fx.userLoginID)" />
+                             </vlayout>
+                                <vlayout>
+                                 <label value="Password"
+                                      sclass="flabel" />
+                                   <textbox id="password" hflex="1"
+                                     readonly="@load(vm.makeAsReadOnly)" mold="rounded"
+                                      value="@bind(fx.password)" />
+                                </vlayout>
+                            </row>
+                        </rows>
+                   </grid>
+               </panelchildren>
+          </panel>
+      </div>
+    </window>
+</zk>

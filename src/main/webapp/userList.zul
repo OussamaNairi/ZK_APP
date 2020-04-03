@@ -1,0 +1,56 @@
+<?page title="Users List" contentType="text/html;charset=UTF-8"?>
+<zk>
+   <window id="userList" border="none"
+      apply="org.zkoss.bind.BindComposer"
+     viewModel="@id('vm') @init('zkexample.zkoss.UserListVM')">
+       <separator />
+     <separator />
+     <div width="100%">
+            <div sclass="sectionTitle">
+               <separator />
+             <label value="Users" sclass="sectionTitleLabel" />
+                <separator />
+         </div>
+            <div style="float:right">
+             <button label="Add New" onClick="@command('onAddNew')"
+                   mold="trendy" sclass="mybutton button blue small" />
+         </div>
+            <div style="clear: both;"></div>
+            <div sclass="sectionSeperator"></div>
+       </div>
+        <separator />
+     <listbox id="" mold="paging" pageSize="11" pagingPosition="top"
+          sclass="mylist" selectedItem="@bind(vm.selectedItem)"
+           model="@load(vm.dataSet)">
+           <listhead sizable="true">
+             <listheader label="First Name" sortDirection="ascending"
+                 sort="auto(firstName)" />
+                <listheader label="last Name" sort="auto(lastName)" />
+                <listheader label="Email" sort="auto(email)" />
+               <listheader label="Login ID" sort="auto(userLoginID)" />
+              <listheader label="Action" />
+         </listhead>
+           <template name="model" var="p1">
+              <listitem>
+                    <listcell label="@load(p1.firstName)" />
+                  <listcell label="@load(p1.lastName)" />
+                   <listcell label="@load(p1.email)" />
+                  <listcell label="@load(p1.userLoginID)" />
+                    <listcell>
+                        <hbox spacing="20px">
+                         <button label="Edit"
+                             onClick="@command('onEdit',userRecord=p1)">
+                          </button>
+                         <button label="View"
+                             onClick="@command('openAsReadOnly',userRecord=p1)">
+                          </button>
+                         <button label="Delete"
+                               onClick="@command('onDelete',userRecord=p1)">
+                            </button>
+                     </hbox>
+                   </listcell>
+               </listitem>
+           </template>
+       </listbox>
+    </window>
+</zk>
